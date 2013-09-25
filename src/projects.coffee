@@ -8,8 +8,8 @@
 #   HUBOT_HILLTOP_PATH
 #
 # Commands:
-#   hubot project <project> - Show details of an Anthill project.
-#   hubot project grep <query> - Displays all Anthill projects with names that match <query>.
+#   hubot show project <project> - Show details of an Anthill project.
+#   hubot grep projects <query> - Displays all Anthill projects with names that match <query>.
 
 exec = require('child_process').exec
 hilltop = (commands, cb) ->
@@ -19,11 +19,11 @@ hilltop = (commands, cb) ->
     cb return_text
 
 module.exports = (robot) ->
-  robot.respond /p(?:roject)? (.+)/i, (msg) ->
+  robot.respond /show project (.+)/i, (msg) ->
     hilltop "project show \"#{msg.match[1]}\"", (output) ->
       msg.send output.replace /\s+$/g, ""
 
-  robot.respond /p(?:roject)? grep (.+)/i, (msg) ->
+  robot.respond /grep projects (.+)/i, (msg) ->
     hilltop "project list", (output) ->
       projects = []
       filter = new RegExp(msg.match[1], 'i')

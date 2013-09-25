@@ -8,7 +8,7 @@
 #   HUBOT_HILLTOP_PATH
 #
 # Commands:
-#   hubot build <project> <workflow> - Build an originating Anthill workflow.
+#   hubot build me <project> <workflow> - Build an originating Anthill workflow.
 
 exec = require('child_process').exec
 hilltop = (commands, cb) ->
@@ -18,6 +18,6 @@ hilltop = (commands, cb) ->
     cb return_text
 
 module.exports = (robot) ->
-  robot.respond /b(?:uild)? (.+) (.+)/i, (msg) ->
+  robot.respond /build me (.+) (.+)/i, (msg) ->
     hilltop "build start \"#{msg.match[1]}\" \"#{msg.match[2]}\"", (output) ->
       msg.send output.replace /\s+$/g, ""

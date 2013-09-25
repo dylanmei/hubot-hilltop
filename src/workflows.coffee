@@ -8,7 +8,7 @@
 #   HUBOT_HILLTOP_PATH
 #
 # Commands:
-#   hubot workflow <project> <workflow> - Show details of an Anthill workflow.
+#   hubot show workflow <project> <workflow> - Show details of an Anthill workflow.
 
 exec = require('child_process').exec
 hilltop = (commands, cb) ->
@@ -18,6 +18,6 @@ hilltop = (commands, cb) ->
     cb return_text
 
 module.exports = (robot) ->
-  robot.respond /w(?:orkflow)? (.+) (.+)/i, (msg) ->
+  robot.respond /show workflow (.+) (.+)/i, (msg) ->
     hilltop "workflow show \"#{msg.match[1]}\" \"#{msg.match[2]}\"", (output) ->
       msg.send output.replace /\s+$/g, ""
