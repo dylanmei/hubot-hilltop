@@ -8,9 +8,9 @@
 #   HUBOT_HILLTOP_PATH
 #
 # Commands:
-#   hubot build <project> <workflow> - Build an originating Anthill workflow.
 #   hubot show build <buildlife> - Show details of an Anthill buildlife.
-#   hubot <workflow> <buildlife> to|in <environment> - Run a workflow against a buildlife in an environment.
+#   hubot build <project> <workflow> - Build an originating Anthill workflow.
+#   hubot run <workflow> <buildlife> to|in <environment> - Run a workflow against a buildlife in an environment.
 
 exec = require('child_process').exec
 hilltop = (commands, cb) ->
@@ -28,6 +28,6 @@ module.exports = (robot) ->
     hilltop "build new \"#{msg.match[1]}\" \"#{msg.match[2]}\"", (output) ->
       msg.send output.replace /\s+$/g, ""
 
-  robot.respond /(.+) (\d+) (?:to|in) (.+)/i, (msg) ->
+  robot.respond /run (.+) (\d+) (?:to|in) (.+)/i, (msg) ->
     hilltop "build run \"#{msg.match[2]}\" \"#{msg.match[1]}\" \"#{msg.match[3]}\"", (output) ->
       msg.send output.replace /\s+$/g, ""
